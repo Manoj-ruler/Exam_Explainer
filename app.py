@@ -35,154 +35,197 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Custom CSS
+# Custom CSS - Modern Premium Design
 st.markdown("""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-    * { font-family: 'Inter', -apple-system, sans-serif; }
     
-    #MainMenu, footer { visibility: hidden; }
-    
-    [data-testid="collapsedControl"],
-    [data-testid="stSidebarCollapseButton"] { display: none !important; }
-    
-    .stApp { background: #FFFFFF; }
-    
-    .main .block-container {
-        max-width: 750px !important;
-        margin: 0 auto !important;
-        padding-top: 2rem !important;
+    * { 
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        transition: all 0.2s ease;
     }
     
-    /* Dark Sidebar */
+    /* Hide Streamlit branding */
+    #MainMenu, footer, .stDeployButton { visibility: hidden; }
+    [data-testid="collapsedControl"], [data-testid="stSidebarCollapseButton"] { display: none !important; }
+    
+    /* ===== MAIN APP BACKGROUND ===== */
+    .stApp { 
+        background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ed 100%);
+    }
+    
+    .main .block-container {
+        max-width: 800px !important;
+        margin: 0 auto !important;
+        padding: 2rem 1rem !important;
+    }
+    
+    /* ===== PREMIUM DARK SIDEBAR ===== */
     [data-testid="stSidebar"] {
-        background: #171717 !important;
-        min-width: 280px !important;
+        background: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%) !important;
+        min-width: 300px !important;
+        border-right: 1px solid rgba(255,255,255,0.05);
     }
     
     [data-testid="stSidebar"] > div:first-child {
-        background: #171717 !important;
-        padding: 1rem !important;
+        background: transparent !important;
+        padding: 1.5rem !important;
     }
     
-    [data-testid="stSidebar"] * { color: #ECECEC !important; }
+    [data-testid="stSidebar"] * { color: #e0e0e0 !important; }
     
     [data-testid="stSidebar"] .stButton > button {
-        background: transparent !important;
-        border: 1px solid #404040 !important;
-        color: #ECECEC !important;
-        border-radius: 8px !important;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+        border: none !important;
+        color: white !important;
+        border-radius: 12px !important;
+        font-weight: 500 !important;
+        padding: 0.75rem 1rem !important;
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
     }
     
     [data-testid="stSidebar"] .stButton > button:hover {
-        background: #262626 !important;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
     }
     
     [data-testid="stSidebar"] .stTextInput input {
-        background: #262626 !important;
-        border: 1px solid #404040 !important;
-        border-radius: 8px !important;
-        color: #ECECEC !important;
+        background: rgba(255,255,255,0.05) !important;
+        border: 1px solid rgba(255,255,255,0.1) !important;
+        border-radius: 10px !important;
+        color: white !important;
     }
     
     [data-testid="stSidebar"] .stSelectbox > div > div {
-        background: #262626 !important;
-        border: 1px solid #404040 !important;
-        border-radius: 8px !important;
+        background: rgba(255,255,255,0.05) !important;
+        border: 1px solid rgba(255,255,255,0.1) !important;
+        border-radius: 10px !important;
     }
     
-    [data-testid="stSidebar"] hr { border-color: #333 !important; }
+    [data-testid="stSidebar"] hr { 
+        border-color: rgba(255,255,255,0.1) !important; 
+        margin: 1.5rem 0 !important;
+    }
     
     .section-label {
         font-size: 0.7rem;
-        color: #888 !important;
+        color: #8b8b9a !important;
         text-transform: uppercase;
-        padding: 0.75rem 0 0.5rem 0;
+        letter-spacing: 1px;
+        font-weight: 600;
+        padding: 1rem 0 0.5rem 0;
     }
     
-    .chat-item {
-        padding: 0.6rem 0.75rem;
-        font-size: 0.85rem;
-        border-radius: 8px;
-        margin-bottom: 0.25rem;
-        cursor: pointer;
-    }
-    
-    .chat-item:hover, .chat-item.active { background: #262626; }
-    
-    /* Welcome */
+    /* ===== WELCOME SCREEN ===== */
     .welcome-container {
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding: 2rem 0;
+        padding: 4rem 2rem;
+        animation: fadeIn 0.6s ease;
+    }
+    
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
     }
     
     .mascot {
-        width: 70px;
-        height: 70px;
-        background: linear-gradient(135deg, #F3E8FF 0%, #E9D5FF 100%);
+        width: 100px;
+        height: 100px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 2rem;
-        margin-bottom: 1.5rem;
+        font-size: 3rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 10px 40px rgba(102, 126, 234, 0.3);
+        animation: float 3s ease-in-out infinite;
+    }
+    
+    @keyframes float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
     }
     
     .greeting { text-align: center; }
-    .greeting h1, .greeting h2 {
-        font-size: 1.6rem;
-        font-weight: 600;
-        color: #171717;
+    .greeting h1 {
+        font-size: 2.2rem;
+        font-weight: 700;
+        color: #1a1a2e;
+        margin: 0 0 0.5rem 0;
+    }
+    .greeting h2 {
+        font-size: 1.5rem;
+        font-weight: 400;
+        color: #4a4a6a;
         margin: 0;
     }
     
     .gradient-text {
-        background: linear-gradient(135deg, #8B5CF6 0%, #06B6D4 100%);
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
+        font-weight: 600;
     }
     
-    /* Buttons */
+    /* ===== QUICK ACTION BUTTONS ===== */
     .stButton > button {
-        background: #FFFFFF !important;
-        border: 1px solid #E5E5E5 !important;
-        border-radius: 12px !important;
-        color: #171717 !important;
-    }
-    
-    .stButton > button:hover { background: #F9FAFB !important; }
-    
-    /* Chat */
-    [data-testid="stChatMessage"] {
-        background: #F7F7F8 !important;
+        background: white !important;
+        border: 1px solid #e0e0e0 !important;
         border-radius: 16px !important;
-        padding: 1.25rem !important;
+        color: #1a1a2e !important;
+        font-weight: 500 !important;
+        padding: 1rem 1.5rem !important;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+    
+    .stButton > button:hover { 
+        background: white !important;
+        border-color: #667eea !important;
+        box-shadow: 0 4px 20px rgba(102, 126, 234, 0.15);
+        transform: translateY(-2px);
+    }
+    
+    /* ===== CHAT MESSAGES ===== */
+    [data-testid="stChatMessage"] {
+        background: white !important;
+        border-radius: 20px !important;
+        padding: 1.5rem !important;
+        margin-bottom: 1rem !important;
         border: none !important;
+        box-shadow: 0 2px 15px rgba(0,0,0,0.05);
     }
     
-    [data-testid="stChatMessage"] * {
-        color: #171717 !important;
-    }
-    
+    [data-testid="stChatMessage"] *, 
     [data-testid="stChatMessage"] p,
     [data-testid="stChatMessage"] span,
     [data-testid="stChatMessage"] div {
-        color: #171717 !important;
+        color: #1a1a2e !important;
     }
     
+    /* Chat input */
     .stChatInput > div {
-        background: #FFFFFF !important;
-        border: 1px solid #E5E5E5 !important;
-        border-radius: 16px !important;
+        background: white !important;
+        border: 2px solid #e0e0e0 !important;
+        border-radius: 20px !important;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.08);
     }
     
-    /* Auth forms */
-    .auth-container {
-        max-width: 400px;
-        margin: 0 auto;
-        padding: 2rem;
+    .stChatInput > div:focus-within {
+        border-color: #667eea !important;
+        box-shadow: 0 4px 25px rgba(102, 126, 234, 0.2);
+    }
+    
+    /* ===== AUTH/LOGIN PAGE ===== */
+    .auth-card {
+        background: white;
+        border-radius: 24px;
+        padding: 3rem;
+        box-shadow: 0 10px 50px rgba(0,0,0,0.1);
+        max-width: 420px;
+        margin: 2rem auto;
     }
     
     .auth-header {
@@ -190,59 +233,73 @@ st.markdown("""
         margin-bottom: 2rem;
     }
     
-    /* Form submit buttons - purple gradient */
+    /* Form buttons - gradient */
     [data-testid="stForm"] button[type="submit"],
     .stForm button {
-        background: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%) !important;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
         color: white !important;
         border: none !important;
-        border-radius: 8px !important;
-        padding: 0.75rem 1.5rem !important;
-        font-weight: 500 !important;
+        border-radius: 12px !important;
+        padding: 0.9rem 2rem !important;
+        font-weight: 600 !important;
+        font-size: 1rem !important;
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
     }
     
-    [data-testid="stForm"] button[type="submit"]:hover,
-    .stForm button:hover {
-        background: linear-gradient(135deg, #7C3AED 0%, #6D28D9 100%) !important;
+    [data-testid="stForm"] button[type="submit"]:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 25px rgba(102, 126, 234, 0.5);
     }
     
     /* Form inputs */
     .stTextInput input {
-        background: #FFFFFF !important;
-        border: 1px solid #E5E5E5 !important;
-        border-radius: 8px !important;
-        color: #171717 !important;
+        background: #f8f9fa !important;
+        border: 2px solid #e0e0e0 !important;
+        border-radius: 12px !important;
+        color: #1a1a2e !important;
+        padding: 0.75rem 1rem !important;
+        font-size: 1rem !important;
     }
     
     .stTextInput input:focus {
-        border-color: #8B5CF6 !important;
-        box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.2) !important;
+        border-color: #667eea !important;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.15) !important;
     }
     
-    /* Tabs - Login/Sign Up */
-    .stTabs [data-baseweb="tab-list"] {
-        background: transparent !important;
-    }
-    
-    .stTabs [data-baseweb="tab"] {
-        color: #666 !important;
+    .stTextInput label, .stForm label {
+        color: #1a1a2e !important;
         font-weight: 500 !important;
     }
     
+    /* Tabs styling */
+    .stTabs [data-baseweb="tab-list"] {
+        background: transparent !important;
+        gap: 0.5rem;
+    }
+    
+    .stTabs [data-baseweb="tab"] {
+        color: #6b6b7b !important;
+        font-weight: 500 !important;
+        padding: 0.75rem 1.5rem !important;
+        border-radius: 10px !important;
+    }
+    
     .stTabs [aria-selected="true"] {
-        color: #8B5CF6 !important;
-        border-bottom-color: #8B5CF6 !important;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+        color: white !important;
     }
     
-    .stTabs [data-baseweb="tab"]:hover {
-        color: #8B5CF6 !important;
+    /* ===== STATUS BADGES ===== */
+    .badge {
+        display: inline-block;
+        padding: 0.25rem 0.75rem;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: 600;
     }
     
-    /* Labels */
-    .stTextInput label,
-    .stForm label {
-        color: #171717 !important;
-    }
+    .badge-success { background: #d4edda; color: #155724; }
+    .badge-info { background: #e7e3ff; color: #5a4fcf; }
 </style>
 """, unsafe_allow_html=True)
 
