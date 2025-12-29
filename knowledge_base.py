@@ -9,8 +9,8 @@ import os
 from typing import Optional, List, Dict
 from pathlib import Path
 
-# Default knowledge base path
-KNOWLEDGE_BASE_PATH = Path(__file__).parent / "data" / "regulations.json"
+# Default knowledge base path - rag.json in project root
+KNOWLEDGE_BASE_PATH = Path(__file__).parent / "rag.json"
 
 
 class KnowledgeBase:
@@ -27,7 +27,8 @@ class KnowledgeBase:
             knowledge_path: Path to JSON knowledge base file
         """
         self.knowledge_path = Path(knowledge_path) if knowledge_path else KNOWLEDGE_BASE_PATH
-        self.regulations = {}
+        self.documents = []  # List of document chunks from rag.json
+        self.regulations = {}  # Legacy format for backward compatibility
         self.custom_documents = []
         
         # Load knowledge base if exists
@@ -35,7 +36,7 @@ class KnowledgeBase:
     
     def load_knowledge_base(self) -> bool:
         """
-        Load knowledge base from JSON file
+        Load knowledge base from JSON file (supports rag.json array format)
         
         Returns:
             True if loaded successfully, False otherwise
@@ -43,8 +44,17 @@ class KnowledgeBase:
         try:
             if self.knowledge_path.exists():
                 with open(self.knowledge_path, 'r', encoding='utf-8') as f:
-                    self.regulations = json.load(f)
-                return True
+                    data = json.load(f)
+                
+                # Handle array format (rag.json style)
+                if isinstance(data, list):
+                    self.documents = data
+                    print(f"✅ Loaded {len(self.documents)} document chunks from rag.json")
+                    return True
+                # Handle legacy dict format
+                elif isinstance(data, dict):
+                    self.regulations = data
+                    return True
             else:
                 # Use default regulations
                 self.regulations = self._get_default_regulations()
@@ -254,7 +264,56 @@ Attendance % = (Classes Attended / Total Classes) × 100
         query_lower = query.lower()
         relevant_sections = []
         
-        # Keyword matching for relevance
+        # If we have rag.json documents (array format)
+        if self.documents:
+            # Category to keywords mapping for rag.json
+            category_keywords = {
+                "grading": ["grade", "grading", "cgpa", "gpa", "marks", "percentage", "point", "score", "10-point"],
+                "attendance": ["attendance", "detained", "condonation", "absent", "leave", "75%", "65%"],
+                "evaluation": ["internal", "external", "evaluation", "assessment", "continuous", "semester", "cie", "see"],
+                "revaluation": ["revaluation", "re-evaluation", "recheck", "recorrection", "third valuation"],
+                "credits": ["credit", "credits", "160", "workload"],
+                "internship": ["internship", "summer", "project", "industry"],
+                "moocs": ["mooc", "online course", "nptel", "swayam"],
+                "malpractice": ["malpractice", "cheating", "copying", "prohibited", "misconduct"],
+                "promotion": ["promotion", "promoted", "higher semester"],
+                "pass_criteria": ["pass", "passing", "minimum", "35%", "40%"],
+                "general": ["college", "srkr", "autonomous", "regulation", "r23", "programme", "duration"]
+            }
+            
+            # Find matching documents
+            matched_docs = []
+            for doc in self.documents:
+                doc_content = doc.get("content", "").lower()
+                doc_category = doc.get("metadata", {}).get("category", "").lower()
+                
+                # Check if query matches document content or category keywords
+                content_match = any(word in doc_content for word in query_lower.split() if len(word) > 2)
+                category_match = False
+                
+                for category, keywords in category_keywords.items():
+                    if any(kw in query_lower for kw in keywords):
+                        if category in doc_category or any(kw in doc_content for kw in keywords):
+                            category_match = True
+                            break
+                
+                if content_match or category_match:
+                    matched_docs.append(doc)
+            
+            # If no matches, include top 5 most relevant general docs
+            if not matched_docs:
+                matched_docs = self.documents[:5]
+            
+            # Format matched documents
+            for doc in matched_docs[:7]:  # Limit to 7 most relevant
+                content = doc.get("content", "")
+                source = doc.get("metadata", {}).get("source", "Knowledge Base")
+                relevant_sections.append(f"• {content}")
+            
+            if relevant_sections:
+                return "**SRKR Engineering College R23 Regulations:**\n\n" + "\n\n".join(relevant_sections)
+        
+        # Fallback to legacy dict format
         keywords_map = {
             "grading_system": ["grade", "cgpa", "gpa", "marks", "percentage", "point", "score"],
             "internal_external_evaluation": ["internal", "external", "evaluation", "assessment", "continuous", "semester"],
@@ -264,19 +323,16 @@ Attendance % = (Classes Attended / Total Classes) × 100
             "attendance_requirements": ["attendance", "detained", "condonation", "absent", "leave"]
         }
         
-        # Find relevant sections
         for section_key, keywords in keywords_map.items():
             if any(keyword in query_lower for keyword in keywords):
                 if section_key in self.regulations:
                     section = self.regulations[section_key]
                     relevant_sections.append(f"### {section['title']}\n{section['content']}")
         
-        # If no specific match, include all sections (summarized)
         if not relevant_sections:
             for section_key, section in self.regulations.items():
                 relevant_sections.append(f"### {section['title']}\n{section['content']}")
         
-        # Add custom documents if any
         if self.custom_documents:
             relevant_sections.append("\n### Custom Regulations:\n" + "\n".join(self.custom_documents))
         

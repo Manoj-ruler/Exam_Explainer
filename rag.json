@@ -1,0 +1,299 @@
+[
+  {
+    "id": "college_identity",
+    "content": "Sagi Rama Krishnam Raju Engineering College is an autonomous institution affiliated to JNTUK, Kakinada, approved by AICTE and accredited by NAAC with A+ grade. These regulations apply to B.Tech students admitted from the academic year 2023-24 onwards.",
+    "metadata": {
+      "college": "SRKR Engineering College",
+      "regulation": "R23",
+      "program": "B.Tech",
+      "category": "general",
+      "source": "R23_REGULATIONS.pdf"
+    }
+  },
+  {
+    "id": "program_duration_limits",
+    "content": "The B.Tech regular programme duration is four academic years and shall not exceed eight academic years. Students availing the gap year facility may extend the duration by a maximum of two additional years.",
+    "metadata": {
+      "college": "SRKR Engineering College",
+      "regulation": "R23",
+      "program": "B.Tech",
+      "category": "programme_duration",
+      "source": "R23_REGULATIONS.pdf"
+    }
+  },
+  {
+    "id": "required_credits",
+    "content": "To be eligible for the award of the B.Tech degree, a student must register for and successfully secure a total of 160 credits as per the prescribed curriculum structure.",
+    "metadata": {
+      "college": "SRKR Engineering College",
+      "regulation": "R23",
+      "program": "B.Tech",
+      "category": "credits",
+      "source": "R23_REGULATIONS.pdf"
+    }
+  },
+  {
+    "id": "honors_and_minors",
+    "content": "B.Tech with Honors or B.Tech with Minor will be awarded if a student earns an additional 18 credits beyond the regular programme requirements. Registration for Honors or Minors is optional.",
+    "metadata": {
+      "college": "SRKR Engineering College",
+      "regulation": "R23",
+      "program": "B.Tech",
+      "category": "honors_minors",
+      "source": "R23_REGULATIONS.pdf"
+    }
+  },
+  {
+    "id": "admission_policy",
+    "content": "Admissions to the B.Tech programme are made based on eligibility criteria and merit ranks obtained in entrance examinations conducted by the Government or University, subject to reservation rules prescribed from time to time.",
+    "metadata": {
+      "college": "SRKR Engineering College",
+      "regulation": "R23",
+      "program": "B.Tech",
+      "category": "admission",
+      "source": "R23_REGULATIONS.pdf"
+    }
+  },
+  {
+    "id": "credit_definition",
+    "content": "One credit is equivalent to one hour of lecture or tutorial per week or two hours of practical or laboratory work per week. Credits quantify the workload required for successful completion of a course.",
+    "metadata": {
+      "college": "SRKR Engineering College",
+      "regulation": "R23",
+      "program": "B.Tech",
+      "category": "credit_system",
+      "source": "R23_REGULATIONS.pdf"
+    }
+  },
+  {
+    "id": "semester_structure",
+    "content": "Each academic year consists of two semesters. Each semester comprises a minimum of 90 working days including examinations.",
+    "metadata": {
+      "college": "SRKR Engineering College",
+      "regulation": "R23",
+      "program": "B.Tech",
+      "category": "semester",
+      "source": "R23_REGULATIONS.pdf"
+    }
+  },
+  {
+    "id": "programme_structure_overview",
+    "content": "The undergraduate programme includes Humanities and Management, Basic Sciences, Engineering Sciences, Professional Core courses, Electives, Internships, Project work, and Mandatory non-credit courses totaling 160 credits.",
+    "metadata": {
+      "college": "SRKR Engineering College",
+      "regulation": "R23",
+      "program": "B.Tech",
+      "category": "curriculum_structure",
+      "source": "R23_REGULATIONS.pdf"
+    }
+  },
+  {
+    "id": "elective_flexibility",
+    "content": "The curriculum provides increased flexibility with five professional elective courses and four open elective courses, allowing students to specialize in emerging areas of their discipline.",
+    "metadata": {
+      "college": "SRKR Engineering College",
+      "regulation": "R23",
+      "program": "B.Tech",
+      "category": "electives",
+      "source": "R23_REGULATIONS.pdf"
+    }
+  },
+  {
+    "id": "mandatory_induction_program",
+    "content": "A mandatory three-week student induction programme is conducted for first-year students before the commencement of the first semester as per AICTE guidelines.",
+    "metadata": {
+      "college": "SRKR Engineering College",
+      "regulation": "R23",
+      "program": "B.Tech",
+      "category": "induction",
+      "source": "R23_REGULATIONS.pdf"
+    }
+  },
+  {
+    "id": "attendance_rules",
+    "content": "Students must maintain at least 40 percent attendance in each course and 75 percent attendance in aggregate to be eligible for semester end examinations. Attendance below 65 percent shall not be condoned.",
+    "metadata": {
+      "college": "SRKR Engineering College",
+      "regulation": "R23",
+      "program": "B.Tech",
+      "category": "attendance",
+      "source": "R23_REGULATIONS.pdf"
+    }
+  },
+  {
+    "id": "attendance_condonation",
+    "content": "Condonation of attendance shortage up to 10 percent may be granted by the College Academic Committee subject to payment of the prescribed fee.",
+    "metadata": {
+      "college": "SRKR Engineering College",
+      "regulation": "R23",
+      "program": "B.Tech",
+      "category": "attendance",
+      "source": "R23_REGULATIONS.pdf"
+    }
+  },
+  {
+    "id": "theory_course_evaluation",
+    "content": "Theory courses are evaluated for 100 marks consisting of 30 marks for Continuous Internal Evaluation and 70 marks for Semester End Examination.",
+    "metadata": {
+      "college": "SRKR Engineering College",
+      "regulation": "R23",
+      "program": "B.Tech",
+      "category": "evaluation",
+      "source": "R23_REGULATIONS.pdf"
+    }
+  },
+  {
+    "id": "internal_evaluation_process",
+    "content": "Continuous Internal Evaluation includes two internal exams comprising objective questions, subjective questions, and assignments. Final internal marks are calculated using 80 percent weightage of the better exam and 20 percent of the other.",
+    "metadata": {
+      "college": "SRKR Engineering College",
+      "regulation": "R23",
+      "program": "B.Tech",
+      "category": "evaluation",
+      "source": "R23_REGULATIONS.pdf"
+    }
+  },
+  {
+    "id": "minimum_pass_criteria",
+    "content": "A student must secure a minimum of 35 percent marks in the semester end examination and 40 percent in total to pass a theory or practical course.",
+    "metadata": {
+      "college": "SRKR Engineering College",
+      "regulation": "R23",
+      "program": "B.Tech",
+      "category": "pass_criteria",
+      "source": "R23_REGULATIONS.pdf"
+    }
+  },
+  {
+    "id": "practical_course_evaluation",
+    "content": "Practical courses are evaluated with 30 marks for internal assessment and 70 marks for end examination, including procedure, experiment results, and viva voce.",
+    "metadata": {
+      "college": "SRKR Engineering College",
+      "regulation": "R23",
+      "program": "B.Tech",
+      "category": "evaluation",
+      "source": "R23_REGULATIONS.pdf"
+    }
+  },
+  {
+    "id": "mandatory_courses",
+    "content": "Mandatory non-credit courses such as Environmental Science and Indian Constitution are evaluated internally and must be passed to qualify for degree completion.",
+    "metadata": {
+      "college": "SRKR Engineering College",
+      "regulation": "R23",
+      "program": "B.Tech",
+      "category": "mandatory_courses",
+      "source": "R23_REGULATIONS.pdf"
+    }
+  },
+  {
+    "id": "skill_enhancement_courses",
+    "content": "Five skill enhancement courses are offered between the third and seventh semesters, including domain-specific, interdisciplinary, and soft skill courses.",
+    "metadata": {
+      "college": "SRKR Engineering College",
+      "regulation": "R23",
+      "program": "B.Tech",
+      "category": "skill_courses",
+      "source": "R23_REGULATIONS.pdf"
+    }
+  },
+  {
+    "id": "moocs_requirement",
+    "content": "Students must successfully complete at least one approved MOOC course during the programme. Core courses are not permitted through MOOCs.",
+    "metadata": {
+      "college": "SRKR Engineering College",
+      "regulation": "R23",
+      "program": "B.Tech",
+      "category": "moocs",
+      "source": "R23_REGULATIONS.pdf"
+    }
+  },
+  {
+    "id": "credit_transfer_policy",
+    "content": "Credit transfer through MOOCs is permitted up to a maximum of 20 percent of total programme credits, applicable only to professional and open elective courses.",
+    "metadata": {
+      "college": "SRKR Engineering College",
+      "regulation": "R23",
+      "program": "B.Tech",
+      "category": "credit_transfer",
+      "source": "R23_REGULATIONS.pdf"
+    }
+  },
+  {
+    "id": "summer_internship_policy",
+    "content": "Two mandatory summer internships of minimum eight weeks each must be completed at the end of second and third years, focusing on community service and industry exposure respectively.",
+    "metadata": {
+      "college": "SRKR Engineering College",
+      "regulation": "R23",
+      "program": "B.Tech",
+      "category": "internship",
+      "source": "R23_REGULATIONS.pdf"
+    }
+  },
+  {
+    "id": "final_year_internship_project",
+    "content": "In the final semester, students must undergo a full semester internship along with project work, which is evaluated for a total of 200 marks.",
+    "metadata": {
+      "college": "SRKR Engineering College",
+      "regulation": "R23",
+      "program": "B.Tech",
+      "category": "project",
+      "source": "R23_REGULATIONS.pdf"
+    }
+  },
+  {
+    "id": "revaluation_policy",
+    "content": "Revaluation is permitted only for theory course semester end examinations. A third valuation is conducted if the difference exceeds 20 percent.",
+    "metadata": {
+      "college": "SRKR Engineering College",
+      "regulation": "R23",
+      "program": "B.Tech",
+      "category": "revaluation",
+      "source": "R23_REGULATIONS.pdf"
+    }
+  },
+  {
+    "id": "grading_system",
+    "content": "The institution follows a 10-point absolute grading system ranging from S grade for 90 percent and above to F grade for marks below 40. Absent students receive Ab grade.",
+    "metadata": {
+      "college": "SRKR Engineering College",
+      "regulation": "R23",
+      "program": "B.Tech",
+      "category": "grading",
+      "source": "R23_REGULATIONS.pdf"
+    }
+  },
+  {
+    "id": "promotion_rules",
+    "content": "Promotion to higher semesters requires satisfying attendance criteria and securing at least 40 percent of credits in completed semesters.",
+    "metadata": {
+      "college": "SRKR Engineering College",
+      "regulation": "R23",
+      "program": "B.Tech",
+      "category": "promotion",
+      "source": "R23_REGULATIONS.pdf"
+    }
+  },
+  {
+    "id": "malpractice_regulations",
+    "content": "Malpractice during examinations including copying, impersonation, possession of prohibited material, or misconduct leads to cancellation of performance, debarment, or forfeiture of seat.",
+    "metadata": {
+      "college": "SRKR Engineering College",
+      "regulation": "R23",
+      "program": "B.Tech",
+      "category": "malpractice",
+      "source": "R23_REGULATIONS.pdf"
+    }
+  },
+  {
+    "id": "medium_of_instruction",
+    "content": "The medium of instruction for the entire B.Tech programme including examinations and project reports shall be English only.",
+    "metadata": {
+      "college": "SRKR Engineering College",
+      "regulation": "R23",
+      "program": "B.Tech",
+      "category": "general",
+      "source": "R23_REGULATIONS.pdf"
+    }
+  }
+]
