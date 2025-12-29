@@ -1,17 +1,26 @@
 """
 RAG Module - Retrieval Augmented Generation
-Combines vector search with LLM for contextual responses
+Uses local rag.json knowledge base for context
 """
 
 from typing import List, Tuple
-from vector_store import search_similar_documents
+from knowledge_base import KnowledgeBase
 from gemini_client import GeminiClient
-from prompts import get_system_prompt
+
+# Initialize knowledge base (loads rag.json)
+_kb = None
+
+def get_knowledge_base() -> KnowledgeBase:
+    """Get or create knowledge base instance"""
+    global _kb
+    if _kb is None:
+        _kb = KnowledgeBase()
+    return _kb
 
 
-def get_relevant_context(query: str, top_k: int = 5) -> Tuple[str, List[dict]]:
+def get_relevant_context(query: str, top_k: int = 7) -> Tuple[str, List[dict]]:
     """
-    Retrieve relevant document chunks for a query
+    Retrieve relevant document chunks for a query from rag.json
     
     Args:
         query: User's question
@@ -20,24 +29,23 @@ def get_relevant_context(query: str, top_k: int = 5) -> Tuple[str, List[dict]]:
     Returns:
         Tuple of (formatted context string, list of source documents)
     """
-    results = search_similar_documents(query, top_k)
+    kb = get_knowledge_base()
     
-    if not results:
-        return "", []
+    # Get context from knowledge base (uses rag.json)
+    context = kb.get_context_for_query(query)
     
-    # Format context from retrieved chunks
-    context_parts = []
+    # Build sources list from matched documents
     sources = []
+    if kb.documents:
+        query_lower = query.lower()
+        for doc in kb.documents[:top_k]:
+            if any(word in doc.get("content", "").lower() for word in query_lower.split() if len(word) > 2):
+                sources.append({
+                    "id": doc.get("id", "unknown"),
+                    "content": doc.get("content", "")[:80] + "...",
+                    "similarity": 0.85  # Simulated for display
+                })
     
-    for i, doc in enumerate(results, 1):
-        context_parts.append(f"[Source {i}]: {doc['content']}")
-        sources.append({
-            "id": doc.get('id'),
-            "content": doc['content'][:100] + "...",
-            "similarity": doc.get('similarity', 0)
-        })
-    
-    context = "\n\n".join(context_parts)
     return context, sources
 
 
@@ -45,10 +53,10 @@ def generate_rag_response(
     query: str, 
     gemini_client: GeminiClient,
     language: str = "English",
-    top_k: int = 5
+    top_k: int = 7
 ) -> Tuple[str, List[dict]]:
     """
-    Generate a response using RAG
+    Generate a response using RAG with local rag.json
     
     Args:
         query: User's question
@@ -59,32 +67,34 @@ def generate_rag_response(
     Returns:
         Tuple of (response text, sources list)
     """
-    # Get relevant context
+    # Get relevant context from rag.json
     context, sources = get_relevant_context(query, top_k)
     
     # Build the prompt with context
     if context:
-        augmented_prompt = f"""Based on the following context from the knowledge base, answer the user's question.
+        augmented_prompt = f"""You are an expert on SRKR Engineering College R23 regulations.
+Based on the following official regulations, answer the student's question accurately.
 
-CONTEXT FROM KNOWLEDGE BASE:
+OFFICIAL REGULATIONS FROM SRKR ENGINEERING COLLEGE (R23):
 {context}
 
-USER QUESTION: {query}
+STUDENT QUESTION: {query}
 
 Instructions:
-- Use the context to provide accurate, specific information
-- If the context doesn't contain relevant information, say so and provide general guidance
-- Always be helpful and educational
+- Use ONLY the regulations provided above to answer
+- Be specific and cite the actual rules
+- If asked about something not in the regulations, say so clearly
+- Be helpful and student-friendly
 - Respond in {language}"""
     else:
-        augmented_prompt = f"""The knowledge base doesn't have specific information about this topic.
+        augmented_prompt = f"""You are an expert on academic regulations.
 
-USER QUESTION: {query}
+STUDENT QUESTION: {query}
 
 Instructions:
 - Provide general guidance based on common academic practices
-- Be clear that this is general information
-- Suggest the user check their institution's specific policies
+- Mention this is general information
+- Suggest checking SRKR R23 regulations for specifics
 - Respond in {language}"""
     
     try:
@@ -99,9 +109,8 @@ def format_citations(sources: List[dict]) -> str:
     if not sources:
         return ""
     
-    citations = "\n\n---\n📚 **Sources:**\n"
-    for i, source in enumerate(sources, 1):
-        similarity = source.get('similarity', 0)
-        citations += f"\n{i}. {source['content']} (relevance: {similarity:.0%})"
+    citations = "\n\n---\n📚 **Sources from R23 Regulations:**\n"
+    for i, source in enumerate(sources[:3], 1):  # Show max 3 sources
+        citations += f"\n{i}. {source['content']}"
     
     return citations

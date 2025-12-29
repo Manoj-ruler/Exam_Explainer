@@ -25,8 +25,7 @@ from database import (
     save_message, get_session_messages,
     delete_chat_session, update_session_title
 )
-from rag import generate_rag_response, format_citations
-from vector_store import get_document_count
+from rag import generate_rag_response, format_citations, get_knowledge_base
 
 # Page configuration
 st.set_page_config(
@@ -443,7 +442,8 @@ def render_sidebar():
         
         # Knowledge base status
         st.markdown("---")
-        doc_count = get_document_count()
+        kb = get_knowledge_base()
+        doc_count = len(kb.documents) if kb.documents else 0
         st.markdown(f"📚 **Knowledge Base:** {doc_count} chunks")
         
         # Logout
